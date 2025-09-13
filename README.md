@@ -11,7 +11,7 @@
 
 **Advanced encryption and decryption tools with educational content for beginners and experts**
 
-[🚀 Live Demo](https://hnikhil-dev.github.io/classical-cryptography-suite) • [📖 Documentation](#documentation) • [🤝 Contributing](#contributing) • [📝 License](#license)
+[🚀 Live Demo](https://cipher-encryption-suite.vercel.app/)
 
 </div>
 
