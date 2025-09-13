@@ -333,23 +333,7 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 [![Twitter](https://img.shields.io/badge/Twitter-%231DA1F2.svg?style=for-the-badge&logo=twitter&logoColor=white)](https://x.com/NikhilDabhade17)
 [![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/hnikhil-dev)
 
-*This project was created as an educational tool to help students and enthusiasts learn about classical cryptography in an interactive way.*
-
-</div>
-
----
-
-## 📞 Support & Feedback
-
-<div align="center">
-
-**Have questions or suggestions?**
-
-📧 **Email**: Contact via LinkedIn  
-🐛 **Bug Reports**: [Create an issue](https://github.com/hnikhil-dev/classical-cryptography-suite/issues/new)  
-💬 **Discussions**: [Start a discussion](https://github.com/hnikhil-dev/classical-cryptography-suite/discussions)  
-
-**⭐ Star this repository if you found it helpful!**
+*This project was created as an educational tool to help students and enthusiasts learn about classical cryptography interactively.*
 
 </div>
 
