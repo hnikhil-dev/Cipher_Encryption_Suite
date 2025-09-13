@@ -1,8 +1,8 @@
 # 🔐 Classical Cryptography Suite
 
-<div align="center">
+<div align="center" height="10%">
 
-![Classical Cryptography Suite](./favicon.png)
+![Classical Cryptography Suite](fevicon.png)
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?style=for-the-badge)
 ![License](https://img.shields.io/badge/license-MIT-green.svg?style=for-the-badge)
