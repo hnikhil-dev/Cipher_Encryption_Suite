@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Classical Cryptography Suite](./assets/favicon.png)
+![Classical Cryptography Suite](./favicon.png)
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg?style=for-the-badge)
 ![License](https://img.shields.io/badge/license-MIT-green.svg?style=for-the-badge)
