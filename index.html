@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Classical Cryptography Suite</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="assets/fevicon.png" type="image/x-icon">
+</head>
+<body data-color-scheme="dark">
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <h1>Classical Cryptography Suite</h1>
+                    <p class="header-subtitle">Advanced encryption and decryption tools with educational content for beginners and experts</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <div class="container">
+                <!-- Algorithm Selection Tabs -->
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="caesar">Caesar Cipher</button>
+                    <button class="tab-btn" data-tab="vigenere">Vigenère Cipher</button>
+                    <button class="tab-btn" data-tab="analysis">Security Analysis</button>
+                    <button class="tab-btn" data-tab="code">View Code</button>
+                </div>
+
+                <!-- Caesar Cipher Tab -->
+                <div id="caesar-tab" class="tab-content active">
+                    <div class="cipher-section">
+                        <div class="controls-section">
+                            <h2>Caesar Cipher</h2>
+                            <p class="algorithm-description">A substitution cipher where each letter is shifted by a fixed number of positions in the alphabet.</p>
+                            
+                            <div class="form-group">
+                                <label for="caesar-shift" class="form-label">Shift Value (1-25):</label>
+                                <input type="range" id="caesar-shift" class="form-control" min="1" max="25" value="3">
+                                <span id="caesar-shift-value" class="shift-display">3</span>
+                            </div>
+                            
+                            <div class="mode-selector">
+                                <label class="form-label">Mode:</label>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="caesar-mode" value="encrypt" checked> Encrypt</label>
+                                    <label><input type="radio" name="caesar-mode" value="decrypt"> Decrypt</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-processing">
+                            <div class="text-group">
+                                <label for="caesar-input" class="form-label">Input Text:</label>
+                                <textarea id="caesar-input" class="form-control" placeholder="Enter your text here..." rows="4"></textarea>
+                            </div>
+                            
+                            <div class="text-group">
+                                <label for="caesar-output" class="form-label">Output Text:</label>
+                                <textarea id="caesar-output" class="form-control" readonly rows="4"></textarea>
+                                <button id="copy-caesar" class="btn btn--secondary btn--sm">Copy Result</button>
+                            </div>
+                        </div>
+
+                        <div class="explanation-section">
+                            <h3>How it works:</h3>
+                            <div id="caesar-explanation" class="explanation-content">
+                                <p><strong>Formula:</strong> E(x) = (x + n) mod 26 for encryption</p>
+                                <p><strong>Example:</strong> With shift=3, 'A' becomes 'D', 'B' becomes 'E', etc.</p>
+                            </div>
+                        </div>
+
+                        <div class="attack-section">
+                            <h3>Security Demonstration:</h3>
+                            <button id="brute-force-caesar" class="btn btn--primary">Simulate Brute Force Attack</button>
+                            <div id="brute-force-results" class="attack-results hidden"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vigenère Cipher Tab -->
+                <div id="vigenere-tab" class="tab-content">
+                    <div class="cipher-section">
+                        <div class="controls-section">
+                            <h2>Vigenère Cipher</h2>
+                            <p class="algorithm-description">A polyalphabetic substitution cipher using a keyword to vary the Caesar shift.</p>
+                            
+                            <div class="form-group">
+                                <label for="vigenere-key" class="form-label">Encryption Key:</label>
+                                <input type="text" id="vigenere-key" class="form-control" placeholder="Enter key (letters only)" value="KEY">
+                            </div>
+                            
+                            <div class="mode-selector">
+                                <label class="form-label">Mode:</label>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="vigenere-mode" value="encrypt" checked> Encrypt</label>
+                                    <label><input type="radio" name="vigenere-mode" value="decrypt"> Decrypt</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-processing">
+                            <div class="text-group">
+                                <label for="vigenere-input" class="form-label">Input Text:</label>
+                                <textarea id="vigenere-input" class="form-control" placeholder="Enter your text here..." rows="4"></textarea>
+                            </div>
+                            
+                            <div class="text-group">
+                                <label for="vigenere-output" class="form-label">Output Text:</label>
+                                <textarea id="vigenere-output" class="form-control" readonly rows="4"></textarea>
+                                <button id="copy-vigenere" class="btn btn--secondary btn--sm">Copy Result</button>
+                            </div>
+                        </div>
+
+                        <div class="explanation-section">
+                            <h3>How it works:</h3>
+                            <div id="vigenere-explanation" class="explanation-content">
+                                <p><strong>Formula:</strong> E(i) = (P(i) + K(i mod m)) mod 26</p>
+                                <p><strong>Key repeating:</strong> The key repeats to match the text length</p>
+                                <div id="vigenere-demo"></div>
+                            </div>
+                        </div>
+
+                        <div class="attack-section">
+                            <h3>Security Demonstration:</h3>
+                            <button id="kasiski-analysis" class="btn btn--primary">Kasiski Examination Demo</button>
+                            <div id="kasiski-results" class="attack-results hidden"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Analysis Tab -->
+                <div id="analysis-tab" class="tab-content">
+                    <div class="analysis-section">
+                        <h2>Security Analysis & Cryptanalysis</h2>
+                        
+                        <div class="analysis-grid">
+                            <div class="analysis-card">
+                                <h3>Frequency Analysis</h3>
+                                <p>Analyze letter frequencies in your text to identify patterns</p>
+                                <button id="frequency-analysis" class="btn btn--primary">Analyze Current Text</button>
+                                <div class="chart-container" style="height: 300px; position: relative;">
+                                    <canvas id="frequency-chart"></canvas>
+                                </div>
+                            </div>
+
+                            <div class="analysis-card">
+                                <h3>Vulnerability Comparison</h3>
+                                <div class="vulnerability-table">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Algorithm</th>
+                                                <th>Key Space</th>
+                                                <th>Security Level</th>
+                                                <th>Main Vulnerabilities</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Caesar</td>
+                                                <td>25</td>
+                                                <td><span class="status status--error">Very Low</span></td>
+                                                <td>Brute Force, Frequency Analysis</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Vigenère</td>
+                                                <td>26^m</td>
+                                                <td><span class="status status--warning">Low-Medium</span></td>
+                                                <td>Kasiski, Index of Coincidence</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="analysis-card">
+                                <h3>Attack Methods</h3>
+                                <div class="attack-methods">
+                                    <div class="attack-method">
+                                        <h4>Brute Force Attack</h4>
+                                        <p>Effectiveness: 100% against Caesar (25 keys), exponential time for Vigenère</p>
+                                    </div>
+                                    <div class="attack-method">
+                                        <h4>Frequency Analysis</h4>
+                                        <p>Most common letters: E(12.7%), T(9.1%), A(8.2%), O(7.5%)</p>
+                                    </div>
+                                    <div class="attack-method">
+                                        <h4>Kasiski Examination</h4>
+                                        <p>Finds repeated sequences to determine Vigenère key length</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Code View Tab -->
+                <div id="code-tab" class="tab-content">
+                    <div class="code-section">
+                        <h2>Implementation Code</h2>
+                        <p class="code-description">Well-commented implementations for educational purposes</p>
+                        
+                        <div class="code-selector">
+                            <button class="code-btn active" data-code="caesar">Caesar Implementation</button>
+                            <button class="code-btn" data-code="vigenere">Vigenère Implementation</button>
+                            <button class="code-btn" data-code="attacks">Attack Methods</button>
+                        </div>
+
+                        <div id="caesar-code" class="code-display active">
+                            <pre><code>/**
+ * Caesar Cipher Implementation
+ * Simple substitution cipher with fixed shift
+ * Time Complexity: O(n) where n is text length
+ */
+
+function caesarCipher(text, shift, decrypt = false) {
+    // Adjust shift for decryption
+    if (decrypt) shift = 26 - shift;
+    
+    return text.split('').map(char => {
+        // Only process alphabetic characters
+        if (/[A-Za-z]/.test(char)) {
+            // Get character code and normalize to 0-25
+            const code = char.toUpperCase().charCodeAt(0) - 65;
+            
+            // Apply Caesar shift with modulo wrap-around
+            const shifted = (code + shift) % 26;
+            
+            // Convert back to character, preserving original case
+            const newChar = String.fromCharCode(shifted + 65);
+            return char === char.toLowerCase() ? newChar.toLowerCase() : newChar;
+        }
+        
+        // Return non-alphabetic characters unchanged
+        return char;
+    }).join('');
+}
+
+// Brute force attack simulation
+function bruteForceCaesar(ciphertext) {
+    const results = [];
+    
+    // Try all possible shifts (1-25)
+    for (let shift = 1; shift <= 25; shift++) {
+        const decrypted = caesarCipher(ciphertext, shift, true);
+        results.push({ shift, text: decrypted });
+    }
+    
+    return results;
+}</code></pre>
+                        </div>
+
+                        <div id="vigenere-code" class="code-display">
+                            <pre><code>/**
+ * Vigenère Cipher Implementation
+ * Polyalphabetic substitution using keyword
+ * Time Complexity: O(n) where n is text length
+ */
+
+function vigenereCipher(text, key, decrypt = false) {
+    // Normalize key to uppercase
+    key = key.toUpperCase().replace(/[^A-Z]/g, '');
+    
+    if (key.length === 0) return text;
+    
+    let keyIndex = 0;
+    
+    return text.split('').map(char => {
+        // Only process alphabetic characters
+        if (/[A-Za-z]/.test(char)) {
+            const textCode = char.toUpperCase().charCodeAt(0) - 65;
+            const keyCode = key[keyIndex % key.length].charCodeAt(0) - 65;
+            
+            // Apply Vigenère formula
+            let shifted;
+            if (decrypt) {
+                shifted = (textCode - keyCode + 26) % 26;
+            } else {
+                shifted = (textCode + keyCode) % 26;
+            }
+            
+            // Increment key position for alphabetic chars only
+            keyIndex++;
+            
+            // Convert back to character, preserving case
+            const newChar = String.fromCharCode(shifted + 65);
+            return char === char.toLowerCase() ? newChar.toLowerCase() : newChar;
+        }
+        
+        return char;
+    }).join('');
+}
+
+// Key length analysis using Index of Coincidence
+function indexOfCoincidence(text) {
+    const counts = {};
+    let total = 0;
+    
+    // Count letter frequencies
+    for (const char of text.toUpperCase()) {
+        if (/[A-Z]/.test(char)) {
+            counts[char] = (counts[char] || 0) + 1;
+            total++;
+        }
+    }
+    
+    // Calculate IC = Σ(ni * (ni-1)) / (N * (N-1))
+    let sum = 0;
+    for (const count of Object.values(counts)) {
+        sum += count * (count - 1);
+    }
+    
+    return total > 1 ? sum / (total * (total - 1)) : 0;
+}</code></pre>
+                        </div>
+
+                        <div id="attacks-code" class="code-display">
+                            <pre><code>/**
+ * Cryptanalysis Attack Methods
+ * Educational implementations of common attacks
+ */
+
+// Frequency analysis for single substitution ciphers
+function frequencyAnalysis(text) {
+    const frequencies = {};
+    let totalLetters = 0;
+    
+    // Count each letter
+    for (const char of text.toUpperCase()) {
+        if (/[A-Z]/.test(char)) {
+            frequencies[char] = (frequencies[char] || 0) + 1;
+            totalLetters++;
+        }
+    }
+    
+    // Convert to percentages
+    const analysis = [];
+    for (const [letter, count] of Object.entries(frequencies)) {
+        analysis.push({
+            letter,
+            count,
+            frequency: ((count / totalLetters) * 100).toFixed(2)
+        });
+    }
+    
+    // Sort by frequency (descending)
+    return analysis.sort((a, b) => b.count - a.count);
+}
+
+// Kasiski Examination for Vigenère cipher
+function kasiskiExamination(ciphertext) {
+    const text = ciphertext.toUpperCase().replace(/[^A-Z]/g, '');
+    const trigrams = {};
+    const distances = [];
+    
+    // Find all trigrams and their positions
+    for (let i = 0; i <= text.length - 3; i++) {
+        const trigram = text.substr(i, 3);
+        if (!trigrams[trigram]) {
+            trigrams[trigram] = [];
+        }
+        trigrams[trigram].push(i);
+    }
+    
+    // Calculate distances between repeated trigrams
+    for (const [trigram, positions] of Object.entries(trigrams)) {
+        if (positions.length > 1) {
+            for (let i = 1; i < positions.length; i++) {
+                distances.push(positions[i] - positions[i-1]);
+            }
+        }
+    }
+    
+    // Find GCD of distances to estimate key length
+    return distances.length > 0 ? gcd(...distances) : null;
+}
+
+// Greatest Common Divisor helper function
+function gcd(a, b) {
+    return b === 0 ? a : gcd(b, a % b);
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p>Educational Cryptography Suite - For learning purposes only. Not suitable for real-world encryption.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
